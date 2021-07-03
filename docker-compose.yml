@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  traefik:
+    image: traefik:2.4
+    ports:
+      - "8000:8000"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:8000"
+  grader-web:
+    image: grader-web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grader-web.rule=Host(`localhost`)"
+      - "traefik.http.routers.grader-web.entrypoints=web"
+  grader-api:
+    image: grader-api

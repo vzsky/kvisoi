@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KVISOI</title>
+  </head>
+  <body>
+    <div>
+      User status : 
+      {% if user.is_authenticated %} Logged in as {{user}} 
+      {% else %} Not logged in 
+      {% endif %}
+    </div>
+    {% if messages %} {% for msg in messages %}
+    <h3>flash msg {{msg.tags}} : {{msg}}</h3>
+    {% endfor %} {% endif %} {% block content %} {% endblock %}
+  </body>
+</html>
