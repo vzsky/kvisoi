@@ -3,7 +3,7 @@ services:
   traefik:
     image: traefik:2.4
     ports:
-      - "8000:8000"
+      - "80:8000"
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -16,7 +16,7 @@ services:
     image: grader-web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grader-web.rule=Host(`localhost`)"
+      - "traefik.http.routers.grader-web.rule=Host(`localhost`) && Path(`/task/{id:.*}`, `/submit/`, `/submission/{id:.*}`, `/`, `/users/{id:.*}`) " # Should be a better way, Traefik just had PRed this but not released, also make sure to include everything
       - "traefik.http.routers.grader-web.entrypoints=web"
   grader-api:
     image: grader-api
