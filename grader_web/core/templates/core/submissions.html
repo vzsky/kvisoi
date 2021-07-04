@@ -1,0 +1,11 @@
+{% extends "core/base.html" %} 
+{% block content %}
+
+  <h1>Submissions</h1>
+  {% for submission in submissions %}
+    <a href="{% url 'core-submission' submission.id %}">
+      <h4>{{submission}}</h4>
+    </a>
+  {% endfor %}
+
+{% endblock %}

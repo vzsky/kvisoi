@@ -7,13 +7,23 @@ from grader_web.settings import PENDING_STATUS, API_URL, API_SEND_PORT
 import requests, re
 
 def home (req) :
-  return render(req, 'core/home.html', {
+  return render(req, 'core/home.html')
+
+# should do pagination
+def tasks (req) : 
+  return render(req, 'core/tasks.html', {
     'tasks' : Task.objects.all()
   })
 
 def task (req, id) :
   return render(req, 'core/task.html', {
     'task' : Task.objects.get(id=id)
+  })
+
+# should do pagination
+def submissions (req) :
+  return render(req, 'core/submissions.html', {
+    'submissions' : Submission.objects.all()
   })
 
 def submission (req, id) : 
