@@ -1,9 +1,9 @@
-version: "3.9"
+version: "3.7"
 services:
   traefik:
     image: traefik:2.4
     ports:
-      - "80:8000"
+      - "8000:8000" # change to 80:8000 for deployment
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -13,10 +13,15 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:8000"
   grader-web:
-    image: grader-web
+    image: my99n/kvisoi-web:latest
+    volumes:
+      - ./db.sqlite3:/code/db.sqlite3
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grader-web.rule=Host(`localhost`) && Path(`/task/{id:.*}`, `/submit/`, `/submission/{id:.*}`, `/`, `/users/{id:.*}`) " # Should be a better way, Traefik just had PRed this but not released, also make sure to include everything
+      - "traefik.http.routers.grader-web.rule=Host(`localhost`)" # make sure to rule api out
       - "traefik.http.routers.grader-web.entrypoints=web"
   grader-api:
-    image: grader-api
+    image: my99n/grader-api:mount
+    privileged: true
+    volumes:
+      - ./grader_config:/grader_config

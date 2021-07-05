@@ -1,0 +1,36 @@
+{
+  "LangConfig": [
+    {
+      "ID": "c11",
+      "Extension": "c"
+    },
+    {
+      "ID": "cpp14",
+      "Extension": "cpp"
+    },
+    {
+      "ID": "python3",
+      "Extension": "py"
+    },
+    {
+      "ID": "java8",
+      "Extension": "java"
+    },
+    {
+      "ID": "rust",
+      "Extension": "rs"
+    }
+  ],
+  "DefaultMessages": {
+    "Correct": "Output is correct",
+    "Partially Correct": "Output is partially correct",
+    "Incorrect": "Output is incorrect",
+    "Time Limit Exceeded": "Judge killed: time limit exceeded",
+    "Memory Limit Exceeded": "Judge killed: memory limit exceeded",
+    "Runtime Error": "Judge killed: runtime error",
+    "Judge Error": "Judge killed: internal error"
+  },
+  "IsolateBinPath": "/usr/local/bin/isolate",
+  "SyncListenPort": 11112,
+  "SyncUpdatePort": 8000
+}
