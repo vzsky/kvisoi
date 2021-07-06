@@ -118,4 +118,9 @@ INSTALLED_APPS += [
   'django_tables2',
 ]
 
+LOGIN_REDIRECT_URL = 'core-home'
+LOGIN_URL = '/users/login'
+
+PENDING_STATUS = "Pending"
+
 from .local_settings import *

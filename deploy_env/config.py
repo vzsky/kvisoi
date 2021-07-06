@@ -1,7 +1,5 @@
-LOGIN_REDIRECT_URL = 'core-home'
-LOGIN_URL = '/users/login'
-
-PENDING_STATUS = "Pending"
+# THIS IS A SAMPLE FILE
+# EDIT THIS CONFIG BEFORE DEPLOY TO PRODUCTION
 
 API_URL = "http://grader-api" # Name of the service (docker)
 API_SEND_PORT = 11112
