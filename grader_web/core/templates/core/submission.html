@@ -1,11 +1,17 @@
 {% extends "core/base.html" %} 
 {% block content %}
-  <h1> Submission specific content </h1>
-  <h2> Submission : {{submission}} </h2>
-  <h2> submission status : {{submission.status}} </h2>
+  <h1> Submission # {{submission.id}} </h1>
+  <h3> by {{submission.owner}} </h3>
+  <h3> of task <a href="{% url 'core-task' submission.task.id %}"> {{submission.task}}</a> </h3>
+  <h2> judge status : {{submission.status}} </h2>
   <h2> submission result : {{submission.result}} </h2>
-  CODE :
-  <p>
-    {{submission.code}}
-  </p>
+  
+  {% if user == submission.owner or user.is_superuser %}
+    <div class="mt-5">
+      <h4> CODE : </h4>
+      <p>
+        {{submission.code}}
+      </p>
+    </div>
+  {% endif %}
 {% endblock %}

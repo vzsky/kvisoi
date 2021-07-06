@@ -7,7 +7,7 @@ class Task(models.Model):
   author = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
 
   def __str__(self):
-    return f'{self.title}({self.id})'
+    return self.title
 
 class Submission(models.Model):
   owner = models.ForeignKey(User, on_delete=models.CASCADE, default="")

@@ -5,6 +5,7 @@ from .forms import SubmissionForm
 from django.contrib.auth.decorators import login_required
 from grader_web.settings import PENDING_STATUS, API_URL, API_SEND_PORT
 import requests, re
+from .tables import SubmissionTable, TaskTable
 
 def home (req) :
   return render(req, 'core/home.html')
@@ -12,7 +13,7 @@ def home (req) :
 # should do pagination
 def tasks (req) : 
   return render(req, 'core/tasks.html', {
-    'tasks' : Task.objects.all()
+    'table' : TaskTable(Task.objects.all())
   })
 
 def task (req, id) :
@@ -23,7 +24,7 @@ def task (req, id) :
 # should do pagination
 def submissions (req) :
   return render(req, 'core/submissions.html', {
-    'submissions' : Submission.objects.all()
+    'table' : SubmissionTable(Submission.objects.all())
   })
 
 def submission (req, id) : 
