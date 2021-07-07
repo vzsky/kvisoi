@@ -5,7 +5,7 @@
     {% csrf_token %} {{form.as_p}}
     <button id='submitBtn' type="submit">Submit</button>
   </form>
-  
+
   <script>
     var codeBox = document.getElementById('editor')
     var editor = CodeMirror.fromTextArea(codeBox,{
@@ -13,7 +13,16 @@
       mode: "",
       theme: "monokai"
     });
+
+    lang2codemirror = {{json_lang2codemirror|safe}}
+    
+    editor.setOption("mode", $('#lang').val())
+    $('#lang').change(()=>{
+      editor.setOption("mode", lang2codemirror[$('#lang').val()])
+    })
+
     $('#submitBtn').click(editor.save)
+
   </script>
 
 {% endblock %}
