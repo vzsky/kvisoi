@@ -2,7 +2,17 @@
 {% block content %}
   <h1>Submit Code</h1>
   <form method="POST">
-    {% csrf_token %} {{form}}
-    <button type="submit">Submit</button>
+    {% csrf_token %} {{form.as_p}}
+    <button id='submitBtn' type="submit">Submit</button>
   </form>
+  <!-- Can't post with this -->
+  <script>
+    const codeBox = document.getElementById('editor')
+    const editor = CodeMirror.fromTextArea(codeBox,{
+      lineNumbers: true,
+      mode: "",
+      theme: "monokai"
+    });
+    $('#submitBtn').click(editor.save)
+  </script>
 {% endblock %}

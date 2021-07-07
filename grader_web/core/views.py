@@ -3,14 +3,14 @@ from django.http import HttpResponse
 from .models import Task, Submission
 from .forms import SubmissionForm
 from django.contrib.auth.decorators import login_required
-from grader_web.settings import PENDING_STATUS, API_URL, API_SEND_PORT
+from grader_web.settings import PENDING_STATUS, API_URL, API_SEND_PORT, supportedLangs
 import requests, re
 from .tables import SubmissionTable, TaskTable
 
 def home (req) :
   return render(req, 'core/home.html')
 
-# should do pagination
+# should do pagination (done?)
 def tasks (req) : 
   return render(req, 'core/tasks.html', {
     'table' : TaskTable(Task.objects.all())
@@ -21,15 +21,16 @@ def task (req, id) :
     'task' : Task.objects.get(id=id)
   })
 
-# should do pagination
+# should do pagination (done?)
 def submissions (req) :
   return render(req, 'core/submissions.html', {
     'table' : SubmissionTable(Submission.objects.all())
   })
 
 def submission (req, id) : 
+  sub = Submission.objects.get(id=id)
   return render(req, 'core/submission.html', {
-    'submission' : Submission.objects.get(id=id)
+    'submission' : sub,
   })
 
 @login_required
@@ -50,19 +51,13 @@ def submit (req) :
         )
         new_submission.save()
 
-        print({
-          'SubmissionID': new_submission.id,
-          'TaskID': new_submission.task.id,
-          'TargLang': new_submission.lang,
-          'Code': new_submission.code
-        })
-
-        # only normal 1-file tasks - to be improved
+        # only normal 1-file tasks
+        targlang = supportedLangs[new_submission.lang]['grader']
         url = f'{API_URL}:{API_SEND_PORT}/submit'
         r = requests.post(url, json={
           'SubmissionID': str(new_submission.id),
           'TaskID': str(new_submission.task.id),
-          'TargLang': str(new_submission.lang),
+          'TargLang': targlang,
           'Code': [str(new_submission.code)]
         })
 

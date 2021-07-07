@@ -49,6 +49,7 @@ TEMPLATES = [
         'django.template.context_processors.request',
         'django.contrib.auth.context_processors.auth',
         'django.contrib.messages.context_processors.messages',
+        "core.context.supportedlangs",
       ],
     },
   },
@@ -116,7 +117,30 @@ INSTALLED_APPS += [
   'users.apps.UsersConfig',
   'api.apps.ApiConfig',
   'django_tables2',
+  'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+from django.template.defaulttags import register
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+
+# ADD THIS
+supportedLangs = {
+  "python" : {
+    "grader" : "python3",
+    "codemirror" : "python",
+    "name" : "python",
+  },
+  "cpp" : {
+    "grader" : "cpp14",
+    "codemirror" : "text/x-c++src",
+    "name" : "c++",
+  },
+}
 
 LOGIN_REDIRECT_URL = 'core-home'
 LOGIN_URL = '/users/login'

@@ -6,10 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title> KVISOI new web </title>
+    <style type="text/css" media="screen">
+      .code-div {
+        height: 300px;
+      }
+      #editor {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <!-- CODE MIRROR -->
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js" integrity="sha512-uClAZvjjJrwJN8QakX7+03YbWHtx6ZcTw8JoDPucqzviDCYF3QEZNaRXyu1dxdfKm1g/TQ409Ko3CAdb6zXnnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/clike/clike.min.js" integrity="sha512-m3ghu/xpRyZKDD9RVnxZIT8+lYTjrh7tAz7xbj94du1+3voHC2llSKQQOywnxkYzPcjexBUwf2nhGV9caxlEZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/monokai.min.css" integrity="sha512-R6PH4vSzF2Yxjdvb2p2FA06yWul+U0PDDav4b/od/oXf9Iw37zl10plvwOXelrjV2Ai7Eo3vyHeyFUjhXdBCVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   </head>
   <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- <script src="https://pagecdn.io/lib/ace/1.4.12/ace.js" crossorigin="anonymous" integrity="sha256-Q9hnBpgBFstzZOr+OKFOWZWfcF5nFXO8Qz48Nmndo6U="></script> -->
     
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"> KVISOI </a>
@@ -36,18 +60,18 @@
             <li class="nav-item mx-2">
               <p> Welcome, {{user}} </p>
             </li>
-            <li class="nav-item mx-2">
+            <li class="nav-item m-2">
               <a href="{% url 'user-logout' %}">
                 <button class="btn btn-primary">Log out</button>
               </a>
             </li>
             {% else %}
-            <li class="nav-item mx-2">
+            <li class="nav-item m-2">
               <a href="{% url 'user-login' %}">
                 <button class="btn btn-primary">Log in</button>
               </a>
             </li>
-            <li class="nav-item mx-2">
+            <li class="nav-item m-2">
               <a href="{% url 'user-register' %}">
                 <button class="btn btn-primary">Register</button>
               </a>
