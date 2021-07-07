@@ -5,6 +5,7 @@
   <h3> of task <a href="{% url 'core-task' submission.task.id %}"> {{submission.task}}</a> </h3>
   <h2> judge status : {{submission.status}} </h2>
   <h2> submission result : {{submission.result}} </h2>
+  <h2> Verdict : {{submission.response}}</h2>
 
   {% if user == submission.owner or user.is_superuser %}
     <h4> CODE : </h4>

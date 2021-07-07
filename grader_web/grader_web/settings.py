@@ -150,4 +150,17 @@ PENDING_STATUS = "Pending"
 MEDIA_URL = "media/"
 MEDIA_ROOT = "/media"
 
+X_FRAME_OPTIONS='SAMEORIGIN'
+
+verdictSymbol = {
+  "Correct" : "P",
+  "Partially Correct" : "p",
+  "Incorrect" : "-",
+  "Time Limit Exceeded" : "T",
+  "Memory Limit Exceeded" : "M",
+  "Runtime Error" : "X",
+  "Judge Error" : "?",
+  "Skipped" : "S",
+}
+
 from .local_settings import *
