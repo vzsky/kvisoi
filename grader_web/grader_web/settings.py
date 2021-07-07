@@ -147,4 +147,7 @@ LOGIN_URL = '/users/login'
 
 PENDING_STATUS = "Pending"
 
+MEDIA_URL = "media/"
+MEDIA_ROOT = "/media"
+
 from .local_settings import *

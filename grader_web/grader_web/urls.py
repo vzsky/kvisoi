@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 # WARNING! Make sure to restrict api access for internal uses
 
@@ -27,4 +30,4 @@ urlpatterns = [
   url(r'', include('core.urls')),
   # --- Shouldn't be accessible elsewhere but api ---
   url(r'', include('api.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,11 @@
-{% extends "core/base.html" %} {% block content %}
+{% extends "core/base.html" %}
+{% block content %}
   <h1>{{task}}</h1>
   <h3>by {{task.author}}</h3>
-  <h4>show embed pdf for task description (TBI)</h4>
+  <embed 
+    src="/media/task/a_time_b.pdf" 
+    width="700" 
+    height="1000" 
+    type="application/pdf"
+  >
 {% endblock %}
