@@ -10,16 +10,18 @@
     <h4> CODE : </h4>
     <div class="mt-5 code-div">
 
-      <textarea id="editor">{{submission.code}}</textarea>
+      <form><textarea id="editor">{{submission.code}}</textarea></form>
 
       <script>
-        const codeBox = document.getElementById('editor')
-        const editor = CodeMirror.fromTextArea(codeBox,{
+        var codeBox = document.getElementById('editor')
+        var editor = CodeMirror.fromTextArea(codeBox,{
           lineNumbers: true,
-          readOnly: 'nocursor',
+          readOnly: 'true',
           mode: "{{lang2codemirror|get_item:submission.lang}}",
           theme: "monokai"
         });
+        var $wrapper = $(editor.getWrapperElement());
+        $wrapper.addClass('CodeMirror-readonly');
       </script>
 
     </div>
