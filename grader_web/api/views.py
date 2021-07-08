@@ -2,6 +2,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from core.models import Submission, GroupResult, CaseResult
+import logging
+logger = logging.getLogger("mylogger")
 
 @csrf_exempt
 def apistatus (req) :
@@ -25,18 +27,24 @@ def message (req) :
 @csrf_exempt
 def group (req) :
   if req.method == 'POST' : 
+    logger.info("POST TO GROUP")
     data = json.loads(req.body)
     sid = data['SubmissionID']
     result = data['Results']
     try :
       submission = Submission.objects.get(id=sid)
-      index = len(submission.groupresult_set.all())
-      print(result)
+      logger.info(f'group message of submission {sid}')
       submission.score = result['Score']
       submission.timeUsed = result['Time']
       submission.memoryUsed = result['Memory']
       submission.save()
+      logger.info('submission updated')
+      logger.info(f"submission {sid} is now {submission.response}")
+
+      index = len(submission.groupresult_set.all())
+      # should change to a for from index to result['GroupResults'].size()
       newGroupData = result['GroupResults'][index]
+      logger.info("new group will be initiated")
 
       newGroup = GroupResult(
         submission=submission,
@@ -44,9 +52,10 @@ def group (req) :
         fullScore=newGroupData['FullScore'],
       )
       newGroup.save()
-      for num, case in enumerate(newGroupData['Status']) :
+      logger.info(f"group # {len(submission.groupresult_set.all())} saved successfully")
+      logger.info(f"submission {sid} is now {submission.response}")
+      for case in newGroupData['Status'] :
         newcase = CaseResult(
-          id=num+1,
           group=newGroup,
           verdict=case['Verdict'],
           score=case['Score'],
@@ -55,6 +64,9 @@ def group (req) :
           message=case['Message']
         )
         newcase.save()
+        logger.info(f"CASE {newcase}")
+      logger.info(f"all cases saved, total of {len(newGroup.caseresult_set.all())} cases : {newGroup}")
+      logger.info(f"submission {sid} is now {submission.response}")
     except :
       raise
     return JsonResponse("Success", safe=False)

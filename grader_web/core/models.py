@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from grader_web.settings import verdictSymbol
+import logging
+logger = logging.getLogger("mylogger")
 
 class Task(models.Model):
   id = models.CharField(max_length=128, primary_key=True, unique=True)
@@ -31,7 +33,8 @@ class Submission(models.Model):
   @property
   def response (self):
     res = ""
-    for group in self.groupresult_set.all() :
+    logger.info("request submission response")
+    for group in self.groupresult_set.all().order_by('id') :
       res += f'[{group}]'
     return res
 
@@ -42,13 +45,12 @@ class GroupResult (models.Model):
 
   def __str__ (self):
     res = ""
-    for case in self.caseresult_set.all() :
+    for case in self.caseresult_set.all().order_by('id') :
       res += str(case)
-    return res
+    return f'{res}'
 
 class CaseResult (models.Model) :
   group = models.ForeignKey(GroupResult, on_delete=models.CASCADE)
-  id = models.PositiveIntegerField(primary_key=True, unique=True)
   verdict = models.CharField(max_length=128)
   message = models.CharField(max_length=128)
   timeUsed = models.PositiveIntegerField(default=0)
