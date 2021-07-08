@@ -1,4 +1,5 @@
 # THIS IS A SAMPLE FILE
+# THIS WILL GOES TO local_settings.py
 # EDIT THIS CONFIG BEFORE DEPLOY TO PRODUCTION
 
 API_URL = "http://grader-api" # Name of the service (docker)
