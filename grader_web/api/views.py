@@ -39,12 +39,10 @@ def group (req) :
       submission.memoryUsed = result['Memory']
       submission.save()
       logger.info('submission updated')
-      logger.info(f"submission {sid} is now {submission.response}")
 
       index = len(submission.groupresult_set.all())
       # should change to a for from index to result['GroupResults'].size()
       newGroupData = result['GroupResults'][index]
-      logger.info("new group will be initiated")
 
       newGroup = GroupResult(
         submission=submission,
@@ -53,7 +51,6 @@ def group (req) :
       )
       newGroup.save()
       logger.info(f"group # {len(submission.groupresult_set.all())} saved successfully")
-      logger.info(f"submission {sid} is now {submission.response}")
       for case in newGroupData['Status'] :
         newcase = CaseResult(
           group=newGroup,
@@ -64,9 +61,8 @@ def group (req) :
           message=case['Message']
         )
         newcase.save()
-        logger.info(f"CASE {newcase}")
-      logger.info(f"all cases saved, total of {len(newGroup.caseresult_set.all())} cases : {newGroup}")
-      logger.info(f"submission {sid} is now {submission.response}")
+      logger.info(f"all cases saved, cases : {newGroup}")
+      logger.info(f"submission {sid} response is set to {submission.response}")
     except :
       raise
     return JsonResponse("Success", safe=False)

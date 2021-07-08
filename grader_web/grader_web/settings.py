@@ -163,8 +163,23 @@ supportedLangs = {
   "cpp" : {
     "grader" : "cpp14",
     "codemirror" : "text/x-c++src",
-    "name" : "c++",
+    "name" : "C++",
   },
+  "c" : {
+    "grader" : "c11",
+    "codemirror" : "text/x-csrc",
+    "name" : "C",
+  },
+  "rust" : {
+    "grader" : "rust",
+    "codemirror" : "text/x-rustsrc",
+    "name" : "rust",
+  },
+  "java" : {
+    "grader" : "java8",
+    "codemirror" : "text/x-java",
+    "name" : "java",
+  }
 }
 
 LOGIN_REDIRECT_URL = 'core-home'
