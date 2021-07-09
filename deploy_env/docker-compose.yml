@@ -18,7 +18,8 @@ services:
     volumes:
       - ./db.sqlite3:/code/db.sqlite3
       - ./config.py:/code/grader_web/local_settings.py
-      - ./media:/media
+      - ./grader_config/tasks:/media/tasks
+      - ./media/pdf:/media/pdf
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grader-web.rule=Host(`localhost`)" # make sure to rule api out

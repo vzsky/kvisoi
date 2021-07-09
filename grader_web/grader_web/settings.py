@@ -189,6 +189,8 @@ PENDING_STATUS = "Pending"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = "/media"
+MEDIA_PDF = "pdf" # MEDIA_ROOT/pdf
+MEDIA_TASKS = "tasks" # MEDIA_ROOT/tasks
 
 X_FRAME_OPTIONS='SAMEORIGIN'
 

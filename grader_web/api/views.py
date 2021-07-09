@@ -40,29 +40,28 @@ def group (req) :
       submission.save()
       logger.info('submission updated')
 
-      index = len(submission.groupresult_set.all())
-      # should change to a for from index to result['GroupResults'].size()
-      newGroupData = result['GroupResults'][index]
+      for index in range(len(submission.groupresult_set.all()), result['GroupResults'].size()) : 
+        newGroupData = result['GroupResults'][index]
 
-      newGroup = GroupResult(
-        submission=submission,
-        score=newGroupData['Score'],
-        fullScore=newGroupData['FullScore'],
-      )
-      newGroup.save()
-      logger.info(f"group # {len(submission.groupresult_set.all())} saved successfully")
-      for case in newGroupData['Status'] :
-        newcase = CaseResult(
-          group=newGroup,
-          verdict=case['Verdict'],
-          score=case['Score'],
-          timeUsed=case['Time'],
-          memoryUsed=case['Memory'],
-          message=case['Message']
+        newGroup = GroupResult(
+          submission=submission,
+          score=newGroupData['Score'],
+          fullScore=newGroupData['FullScore'],
         )
-        newcase.save()
-      logger.info(f"all cases saved, cases : {newGroup}")
-      logger.info(f"submission {sid} response is set to {submission.response}")
+        newGroup.save()
+        logger.info(f"group # {len(submission.groupresult_set.all())} saved successfully")
+        for case in newGroupData['Status'] :
+          newcase = CaseResult(
+            group=newGroup,
+            verdict=case['Verdict'],
+            score=case['Score'],
+            timeUsed=case['Time'],
+            memoryUsed=case['Memory'],
+            message=case['Message']
+          )
+          newcase.save()
+        logger.info(f"all cases saved, cases : {newGroup}")
+        logger.info(f"submission {sid} response is set to {submission.response}")
     except :
       raise
     return JsonResponse("Success", safe=False)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from grader_web.settings import verdictSymbol
+from grader_web.settings import verdictSymbol, MEDIA_URL, MEDIA_PDF
+import os
 import logging
 logger = logging.getLogger("mylogger")
 
@@ -11,6 +12,21 @@ class Task(models.Model):
 
   def __str__ (self):
     return self.title
+
+  @property
+  def mediaPath (self):
+    return f"/{MEDIA_URL}{MEDIA_PDF}/{self.id}.pdf"
+
+
+def getUploadPath(name):
+  return os.path.join(MEDIA_PDF, name)
+
+def pdfNamer(instance, filename):
+  return getUploadPath(f"{instance.pk}.pdf")
+
+class TaskConfig(models.Model):
+  task = models.OneToOneField(Task, on_delete=models.CASCADE, primary_key=True)
+  pdf = models.FileField(upload_to=pdfNamer)
 
 class Submission(models.Model):
   owner = models.ForeignKey(User, on_delete=models.CASCADE, default="")
