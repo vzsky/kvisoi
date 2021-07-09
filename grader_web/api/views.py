@@ -40,7 +40,7 @@ def group (req) :
       submission.save()
       logger.info('submission updated')
 
-      for index in range(len(submission.groupresult_set.all()), result['GroupResults'].size()) : 
+      for index in range(len(submission.groupresult_set.all()), len(result['GroupResults'])) : 
         newGroupData = result['GroupResults'][index]
 
         newGroup = GroupResult(

@@ -3,7 +3,7 @@
   <h1>Submit Code</h1>
   <form method="POST">
     {% csrf_token %} {{form.as_p}}
-    <button id='submitBtn' type="submit">Submit</button>
+    <button class="btn btn-primary" id='submitBtn' type="submit">Submit</button>
   </form>
 
   <script>

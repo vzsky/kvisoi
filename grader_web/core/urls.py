@@ -9,4 +9,5 @@ urlpatterns = [
   url(r'^submission/(?P<id>[0-9]+)$', views.submission, name='core-submission'),
   url(r'^submissions/$', views.submissions, name='core-submissions'),
   url(r'^submit/$', views.submit, name='core-submit'),
+  url(r'^submit/(?P<taskid>[a-zA-Z0-9-_]+)$', views.task_submit, name='core-task_submit'),
 ]

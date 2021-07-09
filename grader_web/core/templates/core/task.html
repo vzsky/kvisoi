@@ -2,6 +2,10 @@
 {% block content %}
   <h1>{{task}}</h1>
   <h3>by {{task.author}}</h3>
+  <a href="{% url 'core-task_submit' task.id %}">
+    <button class="btn btn-primary">Submit now</button>
+  </a>
+  <br><br>
   <embed 
     src="{{task.mediaPath}}" 
     width="700" 
