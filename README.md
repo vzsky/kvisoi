@@ -32,3 +32,4 @@ A simple web application that judges codes, made for KVIS Olympiad in Informatic
 - Better profile page
 - Some kind of automation in adding a task
 - Add subission timestamp (cause why not)
+- Docker Mount `local_settings`
