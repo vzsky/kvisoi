@@ -1,15 +1,15 @@
-{% extends "core/base.html" %}
-{% block content %}
-  <h1>{{task}}</h1>
-  <h3>by {{task.author}}</h3>
-  <a href="{% url 'core-task_submit' task.id %}">
-    <button class="btn btn-primary">Submit now</button>
-  </a>
-  <br><br>
-  <embed 
-    src="{{task.mediaPath}}" 
-    width="700" 
-    height="1000" 
-    type="application/pdf"
-  >
+{% extends "core/base.html" %} {% block content %}
+
+<h1 class="display-6">{{task.title}}</h1>
+<h5>by {{task.author}}</h5>
+<a href="{% url 'core-task_submit' task.id %}">
+  <button class="btn btn-primary btn-sm">Submit</button>
+</a>
+<br /><br />
+<embed
+  src="{{task.mediaPath}}"
+  width="700"
+  height="1000"
+  type="application/pdf"
+/>
 {% endblock %}
