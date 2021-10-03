@@ -8,7 +8,15 @@ import requests, re
 from .tables import SubmissionTable, TaskTable
 
 def home (req) :
-  return render(req, 'core/home.html')
+
+  # quote API
+  quote = "The early bird catches the worm, but the early worm gets eaten"
+  author = "Anonymous"
+
+  return render(req, 'core/home.html',{
+    'quote': quote,
+    'author': author
+  })
 
 # should do pagination (done?)
 def tasks (req) : 
@@ -24,7 +32,7 @@ def task (req, id) :
 # should do pagination (done?)
 def submissions (req) :
   return render(req, 'core/submissions.html', {
-    'table' : SubmissionTable(Submission.objects.all())
+    'table' : SubmissionTable(Submission.objects.all().order_by('-id'))
   })
 
 def submission (req, id) : 

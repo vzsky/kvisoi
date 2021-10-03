@@ -1,7 +1,11 @@
 # KVISOI
+
 A simple web application that judges codes, made for KVIS Olympiad in Informatics Club.
-## Instruction 
+
+## Instruction
+
 ### To run the program
+
   1. Download **ONLY** the deploy_env directory 
   2. Edit the docker-compose.yml file, correct the site configuration
   4. Deploy using `docker-compose up`
@@ -13,16 +17,20 @@ A simple web application that judges codes, made for KVIS Olympiad in Informatic
 ### To access admin page
   1. Create new superuser by `python manage.py createsuperuser`
   2. Access /admin and login
+
 ### To contribute
-  1. Fork this project and make a PR!
+
+1. Fork this project and make a PR!
 
 ## Concerns
+
 ### API route is not blocked
   - Anyone can send request to certain endpoint to fake judge result
   - To be fix by restricting those endpoints from external access
     - Traefik can handle this (waiting for the next update for a neat implementation)
 
 ## Things to be improved
+
 - Templates obviously (responsive will be appreciated)
 - Use websocket to update submission
 - Write tests
@@ -33,3 +41,7 @@ A simple web application that judges codes, made for KVIS Olympiad in Informatic
 - Some kind of automation in adding a task
 - Add subission timestamp (cause why not)
 - Docker Mount `local_settings`
+
+## Instruction for front-end (no Docker required)
+
+[README.md](grader_web/README.md)
