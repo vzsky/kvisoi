@@ -1,4 +1,7 @@
 {% extends "core/base.html" %} {% block content %}
+<script>
+  document.title = "Submit  — KVISOI";
+</script>
 <h1>Submit Code</h1>
 <form method="POST" class="pb-lg-3">
   {% csrf_token %} {{form.as_p}}

@@ -1,4 +1,7 @@
 {% extends "core/base.html" %} {% block content %}
+<script>
+  document.title = "Submission #{{submission.id}} by {{submission.owner}} of {{submission.task}} — KVISOI";
+</script>
 <h1 class="display-6">Submission #{{submission.id}}</h1>
 <h5>
   by

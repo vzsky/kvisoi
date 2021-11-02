@@ -1,5 +1,7 @@
 {% extends "core/base.html" %} {% block content %}
-
+<script>
+  document.title = "{{task.title}} by {{task.author}} — KVISOI";
+</script>
 <h1 class="display-6">{{task.title}}</h1>
 <h5>by {{task.author}}</h5>
 <a href="{% url 'core-task_submit' task.id %}">
